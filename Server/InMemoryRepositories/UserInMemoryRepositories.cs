@@ -16,7 +16,7 @@ public class UserInMemoryRepositories : IUserRespository
         return Task.FromResult(user);
     }
 
-    public Task UpdateAsync(User user)
+    public Task<User> UpdateAsync(User user)
     {
         User? existingUser = users.SingleOrDefault(u => u.Id == user.Id);
         if (existingUser is null)
@@ -28,7 +28,7 @@ public class UserInMemoryRepositories : IUserRespository
         users.Remove(existingUser);
         users.Add(user);
 
-        return Task.CompletedTask;
+        return (Task<User>)Task.CompletedTask;
     }
 
     public Task DeleteAsync(int id)

@@ -16,7 +16,7 @@ public class PostInMemoryRepositories : IPostRespository
         return Task.FromResult(post);
     }
 
-    public Task UpdateAsync(Post post)
+    public Task<Post> UpdateAsync(Post post)
     {
         Post? existingPost = posts.SingleOrDefault(p => p.Id == post.Id);
         if (existingPost is null)
@@ -28,7 +28,7 @@ public class PostInMemoryRepositories : IPostRespository
         posts.Remove(existingPost);
         posts.Add(post);
 
-        return Task.CompletedTask;
+        return (Task<Post>)Task.CompletedTask;
     }
 
     public Task DeleteAsync(int id)
