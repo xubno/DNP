@@ -54,7 +54,7 @@ public class AddCommentToPost
              ? commentRespository.GetMany().Max(x => x.Id) + 1
              : 1;
          
-         var newcomment = new Comment(commentId, commentBody, postToCommentOn.Id);
+         var newcomment = new Comment();
          await commentRespository.AddAsync(newcomment);
          
          Console.WriteLine($"comment added to {postToCommentOn.Id}");

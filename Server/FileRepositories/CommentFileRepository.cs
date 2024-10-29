@@ -70,8 +70,9 @@ public class CommentFileRepository : ICommentRespository
 
     public IQueryable<Comment> GetMany()
     {
-        string commentsAsJson = File.ReadAllTextAsync(filePath).Result;
+        var commentsAsJson = File.ReadAllTextAsync(filePath).Result;
         List<Comment> comments = JsonSerializer.Deserialize<List<Comment>>(commentsAsJson)!;
         return comments.AsQueryable();
+            
     }
 }

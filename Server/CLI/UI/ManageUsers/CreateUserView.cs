@@ -26,8 +26,8 @@ public class CreateUserView
                 username = Console.ReadLine();
 
                 
-                var existingUser = userRespository.GetMany().FirstOrDefault(u => u.Username == username);
-                if (existingUser != null)
+                var userAlreadyExist = userRespository.GetMany().ToList().FirstOrDefault(u => u.Username == username);
+                if (userAlreadyExist != null)
                 {
                     Console.WriteLine("Username is already taken. Please choose another one.");
                 }
@@ -45,7 +45,12 @@ public class CreateUserView
                 ? userRespository.GetMany().Max(u => u.Id) + 1 
                 : 1;
             
-            var newUser = new User(username, password, newId);
+            var newUser = new User
+            {
+                Id = newId,
+                Username = username,
+                Password = password
+            };
             await userRespository.AddAsync(newUser);
 
             Console.WriteLine($"User '{username}' created successfully with ID: {newUser.Id}");

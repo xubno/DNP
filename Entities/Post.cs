@@ -8,11 +8,5 @@ public class Post
     public int UserId { get; set; }
 
 
-    public Post(int id, string title, string body, int userId)
-    {
-        Id = id;
-        this.Title = title;
-        this.Body = body;
-        this.UserId = userId;
-    }
+
 }

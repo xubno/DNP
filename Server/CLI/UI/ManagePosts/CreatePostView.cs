@@ -50,7 +50,7 @@ public class CreatePostView
             ? postRespository.GetMany().Max(x => x.Id) + 1
             : 1;
         
-        var newPost = new Post(postId, title, body, userId);
+        var newPost = new Post();
         await postRespository.AddAsync(newPost);
         
         Console.WriteLine($"post {title} created successfully for user {userId} with post id {newPost.Id}"); 

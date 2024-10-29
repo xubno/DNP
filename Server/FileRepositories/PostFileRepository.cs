@@ -6,7 +6,7 @@ namespace FileRepositories;
 
 public class PostFileRepository : IPostRespository
 {
-    private readonly string filePath = "comments.json";
+    private readonly string filePath = "posts.json";
         
     public PostFileRepository()
     {
@@ -22,7 +22,7 @@ public class PostFileRepository : IPostRespository
         int maxId = posts.Count > 0 ? posts.Max(c => c.Id) : 1;
         post.Id = maxId + 1;
         posts.Add(post);
-        postsAsJson = JsonSerializer.Serialize(post);
+        postsAsJson = JsonSerializer.Serialize(posts);
         await File.WriteAllTextAsync(filePath, postsAsJson);
         return post;
     }
@@ -35,7 +35,7 @@ public class PostFileRepository : IPostRespository
         post.Id = maxId + 1;
         posts.Remove(post);
         posts.Add(post);
-        postsAsJson = JsonSerializer.Serialize(post);
+        postsAsJson = JsonSerializer.Serialize(posts);
         await File.WriteAllTextAsync(filePath, postsAsJson);
         return post;
     }
