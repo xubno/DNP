@@ -1,3 +1,6 @@
+using FileRepositories;
+using RepositoryContracts;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IPostRespository, PostFileRepository>();
+builder.Services.AddScoped<IUserRespository, UserFileRepository>();
+builder.Services.AddScoped<ICommentRespository, CommentFileRepository>();
 
 var app = builder.Build();
 
