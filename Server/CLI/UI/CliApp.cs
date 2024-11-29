@@ -1,4 +1,5 @@
-﻿using CLI.UI.ManagePosts;
+﻿using CLI.UI.ManageComments;
+using CLI.UI.ManagePosts;
 using CLI.UI.ManageUsers;
 using RepositoryContracts;
 
@@ -20,7 +21,7 @@ public class CliApp
     {
         var createUserView = new CreateUserView(userRespository);
         var createPostView = new CreatePostView(postRespository, userRespository);
-        var addCommentView = new AddCommentToPost(commentRespository, postRespository);
+        var createCommentView = new CreateCommentView(commentRespository);
         var listPostView = new ListPostView(commentRespository, postRespository);
 
         bool exitApp = false;
@@ -43,8 +44,9 @@ public class CliApp
                     await createPostView.CreatePostAsync();
                     break;
                 case "3":
-                    await addCommentView.AddCommentAsync();
+                    await createCommentView.ShowConsoleContent();
                     break;
+
                 case "4" :
                     await listPostView.ListPostAsync();
                     break;
