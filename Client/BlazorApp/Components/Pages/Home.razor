@@ -1,0 +1,48 @@
+﻿@page "/"
+@using ApiContracts.Post
+@using BlazorApp.Services
+
+
+@inject IPostService PostService
+
+<PageTitle>Home</PageTitle>
+
+@if (posts == null)
+{
+<p>Loading posts...</p>
+}
+else if (!posts.Any())
+{
+<p>No posts available.</p>
+}
+else
+{
+<div class="post-list">
+    @foreach (var post in posts)
+    {
+    <div class="post-card">
+        <h2>
+            <NavLink href="@($"posts/{post.Id}")">@post.Title</NavLink>
+        </h2>
+        <p>@post.Body</p>
+    </div>
+    }
+</div>
+}
+
+@code {
+private List<PostDto>? posts;
+
+protected override async Task OnInitializedAsync()
+{
+try
+{
+posts = (await PostService.GetPostsAsync()).ToList();
+}
+catch (Exception ex)
+{
+Console.WriteLine($"Error fetching posts: {ex.Message}");
+}
+}
+
+}
